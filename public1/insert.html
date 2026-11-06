@@ -1,0 +1,72 @@
+<!--To insert student data-->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Insert Student</title>
+</head>
+
+<body>
+  <h1>INSERT STUDENT</h1>
+  <hr>
+  <a href="index.html">Home</a> |
+  <a href="list.html">List Students</a> |
+  <a href="listOne.html">List Required Student</a> |
+  <a href="insert.html">Insert Student</a> |
+  <a href="update.html">Update Student</a> |
+  <a href="delete.html">Delete Student</a>
+  <hr>
+  Student Number
+  <input type="number" id="sno">
+  <br><br>
+  Student Name
+  <input type="text" id="name">
+  <br><br>
+  Total Marks
+  <input type="number" id="total">
+  <br><br>
+  age
+  <input type="number" id="age">
+  <br><br>
+  phone no
+  <input type="text" id="phone no">
+  <br><br>
+  <button onclick="saveStudent()">Save</button>
+
+  <br><br>
+
+  <button onclick="location.href='index.html'">Home Page</button>
+
+  <script>
+    function saveStudent() {
+      let sno = document.getElementById("sno").value;
+      let name = document.getElementById("name").value;
+      let total = document.getElementById("total").value;
+      let age = document.getElementById("age").value;
+      let phone no = document.getElementById("phone no").value;
+
+      fetch("/students", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          sno: sno,
+          name: name,
+          total: total,
+          age: age,
+          phone no: phone no
+        })
+      })
+        .then(response => response.text())
+        .then(message => {
+          alert(message);
+          location.href = "index.html";
+        });
+
+    }
+
+  </script>
+</body>
+
+</html>
